@@ -7,7 +7,20 @@ export default class PizzaTranslator extends Component {
     this.state = {text: ''};
   }
 
+  componentDidMount(){
+    setInterval(() => (
+      this.setState(previousState => (
+        {isShowingText: !previousState.isShowingText}
+      ))
+    ), 1000);
+  }
+
+  state = {isShowingText: true};
+
   render() {
+      if (!this.state.isShowingText) {
+        return null;
+      }
     return (
       <View style={{padding: 10}}>
         <TextInput
@@ -17,24 +30,15 @@ export default class PizzaTranslator extends Component {
           value={this.state.text}
         />
         <Text style={{padding: 10, fontSize: 42}}>
-          {this.state.text.split(' ').map((word) => word && '😊😭').join(' ')}
+          {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
         </Text>
-        <Text>This is a demo-page for React Native Project!</Text>
+        <Text style={{padding: 10, fontSize: 42}}>
+          This is a demo test for React Native!
+        </Text>
+        <Text style={{padding: 10, fontSize: 42}}>
+          The input box can disappear!
+        </Text>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-})
-
-
